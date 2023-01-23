@@ -1,18 +1,15 @@
-#ifndef MONTY_H
-#define MONTY_H
+#ifndef __HOOLB__
+#define __HOOLB__
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/syscall.h>
 #include <string.h>
 
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
-
-extern int global_var;
-int global_var;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -30,33 +27,32 @@ typedef struct stack_s
 } stack_t;
 
 /**
- * struct instruction_s - opcoode and its function
+ * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
  */
-
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(stack_t **stack, unsigned int line_num);
 } instruction_t;
 
-char *get_tokens(char *line, unsigned int line_number);
-void push_func(stack_t **stack, unsigned int line_number);
-void pall_func(stack_t **stack, unsigned int line_number);
-void pint_func(stack_t **stack, unsigned int line_number);
-void pop_func(stack_t **stack, unsigned int line_number);
-void nop_func(stack_t **stack, unsigned int line_number);
-void swap_func(stack_t **stack, unsigned int line_number);
-void add_func(stack_t **stack, unsigned int line_number);
-void sub_func(stack_t **stack, unsigned int line_number);
-void div_func(stack_t **stack, unsigned int line_number);
-void mul_func(stack_t **stack, unsigned int line_number);
-void get_func(char *op, stack_t **stack, unsigned int line_number);
-int is_number(char *s);
+void pint(stack_t **stack, unsigned int line_num);
 void free_stack(stack_t *head);
+int pushint(char *list, int ln);
+int _strcmp(char *opcode, char *list);
+void add(stack_t **stack, unsigned int line_num);
+void swap(stack_t **stack, unsigned int line_num);
+void pop(stack_t **stack, unsigned int line_num);
+void push(stack_t **stack, unsigned int line_number, int n);
+void pall(stack_t **stack, unsigned int line_num);
+void execute(char *string[], stack_t *stack);
+int nlfind(char *list);
+void free_list(char *a[]);
+int combfind(char *list, int ln);
+
 
 #endif
